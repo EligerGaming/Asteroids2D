@@ -27,10 +27,10 @@ public class Movement : MonoBehaviour
             transform.position = new Vector2(setLeftPos(transform.position.x), transform.position.y);
         }
         if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextMovement)
-            {
-                nextMovement = Time.time + spaceShipSpeed;
-                transform.position = new Vector2(setRightPos(transform.position.x), transform.position.y);
-            }      
+        {
+            nextMovement = Time.time + spaceShipSpeed;
+            transform.position = new Vector2(setRightPos(transform.position.x), transform.position.y);
+        }      
     }
 
     private float setLeftPos(float currentPos) 

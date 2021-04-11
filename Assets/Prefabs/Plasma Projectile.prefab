@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 194441170978131020}
   - component: {fileID: 7892418300206151297}
   - component: {fileID: 7301064211042609323}
+  - component: {fileID: 3925873558004077006}
   m_Layer: 0
   m_Name: Plasma Projectile
   m_TagString: Untagged
@@ -108,3 +109,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.78, y: 6.8}
   m_EdgeRadius: 0
+--- !u!114 &3925873558004077006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577894625528674134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3380bd020ebbf4aadc00432b9e6551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 0.1
+  projectileDisplacement: 0.1
