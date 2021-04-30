@@ -15,7 +15,7 @@ public class UpdateHealth : MonoBehaviour
     {
         if (spaceShip != null)
         {   
-            var shipHealth = spaceShip.GetComponent<Health>().healthPoints;
+            var shipHealth = (int)spaceShip.GetComponent<Health>().healthPoints;
             if (shipHealth <= 0)
             {
                 spriteRenderer.sprite = null;

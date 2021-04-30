@@ -6,56 +6,52 @@ public class Movement : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float spaceShipInitialPos = 0f;
+    [Range (1f, 10f)] [SerializeField]  float spaceShipSpeed = 10f;
+    [SerializeField] private float leftBorder = -4f;
+    [SerializeField] private float rightBorder = 4f;
     
-    [Range (0.01f, 0.2f)] [SerializeField]  float spaceShipSpeed = 0.1f;
-    [SerializeField] float spaceShipDisplacement = 0.1f;
-    private float nextMovement;
-    private const float leftBorder = -7f;
-    private const float rightBorder = 7f;
+    float currentVelocity()
+    {
+        return gameObject.GetComponent<Rigidbody2D>().velocity.x;
+    }
+    void currentVelocity(float x, float y)
+    {
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
+    }
+    float currentPosition()
+    {
+        return gameObject.transform.position.x;
+    }
+    
+    
     void Start()
     {
-        nextMovement = Time.time;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKey(KeyCode.LeftArrow) && Time.time >= nextMovement)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition() > leftBorder)
         {
-            nextMovement = Time.time + spaceShipSpeed;
-            transform.position = new Vector2(setLeftPos(transform.position.x), transform.position.y);
+            currentVelocity(spaceShipSpeed * -1, 0);
         }
-        if (Input.GetKey(KeyCode.RightArrow) && Time.time >= nextMovement)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition() < rightBorder)
         {
-            nextMovement = Time.time + spaceShipSpeed;
-            transform.position = new Vector2(setRightPos(transform.position.x), transform.position.y);
-        }      
-    }
-
-    private float setLeftPos(float currentPos) 
-    {
-        float newPos = currentPos - spaceShipDisplacement;
-        if (newPos < leftBorder)
+            currentVelocity(spaceShipSpeed, 0);
+        }   
+        //Save Code:  || currentPosition() >= rightBorder || currentPosition() <= leftBorder
+        if (((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
         {
-            return leftBorder;
+            currentVelocity(0, 0);
         }
-        else
+        if (currentPosition() >= rightBorder && currentVelocity() > 0)
         {
-            return newPos;
+            currentVelocity(0, 0);
         }
-    }
-
-    private float setRightPos(float currentPos) 
-    {
-        float newPos = currentPos + spaceShipDisplacement;
-        if (newPos > rightBorder)
+        if (currentPosition() <= leftBorder && currentVelocity() < 0)
         {
-            return rightBorder;
-        }
-        else
-        {
-            return newPos;
+            currentVelocity(0, 0);
         }
     }
 }

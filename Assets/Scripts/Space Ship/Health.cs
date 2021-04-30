@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private static int maxHealth = 3;
-    [SerializeField] int damage = 1;
-    [SerializeField] public int healthPoints = maxHealth;
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    
+    [SerializeField] float maxHealth = 3;
+    [SerializeField] float damage = 1;
+    [SerializeField] public float healthPoints;
+    private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        healthPoints -= damage;
+        if (collider2D.tag == "damageObject")
+        {
+            healthPoints -= damage;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthPoints = maxHealth;
     }
 
     // Update is called once per frame
