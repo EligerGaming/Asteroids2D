@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - damageObject
+  - playerProjectile
   layers:
   - Default
   - TransparentFX

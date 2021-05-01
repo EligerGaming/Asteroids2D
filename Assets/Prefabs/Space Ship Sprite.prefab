@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 528503318}
   m_Layer: 0
   m_Name: Space Ship Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,8 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceShipInitialPos: -23.82
-  spaceShipSpeed: 10
-  spaceShipDisplacement: 0.2
+  spaceShipSpeed: 5
   leftBorder: -4
   rightBorder: 4
 --- !u!60 &5718494019478142759

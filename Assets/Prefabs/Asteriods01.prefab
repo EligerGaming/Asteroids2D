@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38688b45949ac684ca66c51b16027085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreDisplay: {fileID: 8671230762206755467, guid: 22981cf7dc5fb9f4f81b698dad531910,
+    type: 3}
   asteriodSpeed: 7
 --- !u!50 &-6863265387519239101
 Rigidbody2D:
