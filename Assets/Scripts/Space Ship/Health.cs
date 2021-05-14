@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     
@@ -29,6 +29,7 @@ public class Health : MonoBehaviour
         {
             Debug.Log("Healthpoints is zero, destroying ship object.");
             Destroy(gameObject);
+            SceneManager.LoadScene("Start Menu");
         }
 
         // For testing purposes only!

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class DisplayScore : MonoBehaviour
 {
     public GameObject currentScoreGameObject;
@@ -14,6 +15,6 @@ public class DisplayScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Text>().text = currentScoreGameObject.GetComponent<Score>().currentScore.ToString();
+        gameObject.GetComponent<TextMeshPro>().text = currentScoreGameObject.GetComponent<Score>().currentScore.ToString();
     }
 }
