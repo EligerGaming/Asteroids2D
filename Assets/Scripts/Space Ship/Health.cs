@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class Health : MonoBehaviour
 {
     
-    
+    GameObject ScoreObject;
     [SerializeField] float maxHealth = 3;
     [SerializeField] float damage = 1;
     [SerializeField] public float healthPoints;
@@ -19,6 +20,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ScoreObject = GameObject.Find("currentScore");
         healthPoints = maxHealth;
     }
 
@@ -30,6 +32,10 @@ public class Health : MonoBehaviour
             Debug.Log("Healthpoints is zero, destroying ship object.");
             Destroy(gameObject);
             SceneManager.LoadScene("Start Menu");
+            if (ScoreObject.GetComponent<Score>().currentScore > HighScore.getStoredHighScore())
+            {
+                PlayerPrefs.SetInt("High Score", (int)ScoreObject.GetComponent<Score>().currentScore);
+            }
         }
 
         // For testing purposes only!
