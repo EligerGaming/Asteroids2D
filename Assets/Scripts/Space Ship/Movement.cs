@@ -5,25 +5,35 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] float spaceShipInitialPos = 0f;
+    static float spaceShipY = -3.5f;
     [Range (1f, 10f)] [SerializeField]  float spaceShipSpeed = 10f;
     [SerializeField] private float leftBorder = -4f;
     [SerializeField] private float rightBorder = 4f;
-    
-    float currentVelocity()
+    private Vector3 sceneMousePosition;
+    private float currentDisplacement;
+    private float lastMousePos = 0f;
+    private float currentHorizontalVelocity 
     {
-        return gameObject.GetComponent<Rigidbody2D>().velocity.x;
+        get {
+            return gameObject.GetComponent<Rigidbody2D>().velocity.x;
+        }
     }
-    void currentVelocity(float x, float y)
+    void setCurrentPosition(float x)
+    {
+        gameObject.GetComponent<Transform>().position = new Vector2(x, spaceShipY);
+    }
+    // Gets the ship's current position.
+    private float getCurrentPosition
+    {
+        get {
+            return gameObject.transform.position.x;
+        }
+    }
+    void setCurrentVelocity(float x, float y)
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
     }
-    float currentPosition()
-    {
-        return gameObject.transform.position.x;
-    }
-    
-    
+
     void Start()
     {
         
@@ -32,26 +42,87 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition() > leftBorder)
+        Debug.Log("Ship Position = " + getCurrentPosition);
+        Debug.Log("Mouse Position = " + sceneMousePosition.x);
+        currentDisplacement = spaceShipSpeed / Application.targetFrameRate;
+        sceneMousePosition = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y));
+        //Arrow Keys Movement
+        if (PlayerPrefs.GetInt("Input Option") == 0)
         {
-            currentVelocity(spaceShipSpeed * -1, 0);
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && getCurrentPosition > leftBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed * -1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) && getCurrentPosition < rightBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed, 0);
+            }   
+            //Save Code:  || getCurrentPosition() >= rightBorder || getCurrentPosition() <= leftBorder
+            if (((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
+            {
+            setCurrentVelocity(0, 0);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition() < rightBorder)
+        //AWSD Movement
+        if (PlayerPrefs.GetInt("Input Option") == 1)
         {
-            currentVelocity(spaceShipSpeed, 0);
-        }   
-        //Save Code:  || currentPosition() >= rightBorder || currentPosition() <= leftBorder
-        if (((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
-        {
-            currentVelocity(0, 0);
+            if (Input.GetKeyDown(KeyCode.A) && getCurrentPosition > leftBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed * -1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.D) && getCurrentPosition < rightBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed, 0);
+            }   
+            //Save Code:  || getCurrentPosition() >= rightBorder || getCurrentPosition() <= leftBorder
+            if (((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
+            {
+            setCurrentVelocity(0, 0);
+            }
         }
-        if (currentPosition() >= rightBorder && currentVelocity() > 0)
+        //Mouse Movement
+        if (PlayerPrefs.GetInt("Input Option") == 2)
         {
-            currentVelocity(0, 0);
+            if (sceneMousePosition.x != lastMousePos)
+            {
+                if (sceneMousePosition.x < getCurrentPosition && getCurrentPosition > leftBorder)
+                {
+                    setCurrentVelocity(spaceShipSpeed * -1, 0);
+                }
+                if (sceneMousePosition.x > getCurrentPosition && getCurrentPosition < rightBorder)
+                {
+                    setCurrentVelocity(spaceShipSpeed, 0);
+                }
+                lastMousePos = sceneMousePosition.x;
+            } 
+            if (sceneMousePosition.x + currentDisplacement > getCurrentPosition && sceneMousePosition.x - currentDisplacement < getCurrentPosition) {
+                setCurrentPosition(sceneMousePosition.x);
+                setCurrentVelocity(0, 0);
+            }
         }
-        if (currentPosition() <= leftBorder && currentVelocity() < 0)
+        //Controller Movement
+        if (PlayerPrefs.GetInt("Input Option") == 3)
         {
-            currentVelocity(0, 0);
+            if (Input.GetAxis("Horizontal") < -0.5 && getCurrentPosition > leftBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed * -1, 0);
+            }
+            if (Input.GetAxis("Horizontal") > 0.5 && getCurrentPosition < rightBorder)
+            {
+                setCurrentVelocity(spaceShipSpeed, 0);
+            }   
+            if (Input.GetAxis("Horizontal") > -0.5 && Input.GetAxis("Horizontal") < 0.5)
+            {
+                setCurrentVelocity(0, 0);
+            }
+        }
+        if (getCurrentPosition >= rightBorder && currentHorizontalVelocity > 0)
+        {
+            setCurrentVelocity(0, 0);
+        }
+        if (getCurrentPosition <= leftBorder && currentHorizontalVelocity < 0)
+        {
+            setCurrentVelocity(0, 0);
         }
     }
 }

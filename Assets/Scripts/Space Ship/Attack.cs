@@ -16,7 +16,26 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && nextMovement <= Time.time)
+        //Arrow Keys
+        if (Input.GetKey(KeyCode.UpArrow) && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 0)
+        {
+            Instantiate(plasmaProjectile, new Vector2(gameObject.transform.position.x, -2.75f), Quaternion.identity);
+            nextMovement = Time.time + fireRate;
+        }
+        //AWSD Keys
+        if (Input.GetKey(KeyCode.W) && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 1)
+        {
+            Instantiate(plasmaProjectile, new Vector2(gameObject.transform.position.x, -2.75f), Quaternion.identity);
+            nextMovement = Time.time + fireRate;
+        }
+        //Mouse
+        if (Input.GetMouseButton(0) && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 2)
+        {
+            Instantiate(plasmaProjectile, new Vector2(gameObject.transform.position.x, -2.75f), Quaternion.identity);
+            nextMovement = Time.time + fireRate;
+        }
+        //Controller
+        if (Input.GetAxis("Fire") == 1 && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 3)
         {
             Instantiate(plasmaProjectile, new Vector2(gameObject.transform.position.x, -2.75f), Quaternion.identity);
             nextMovement = Time.time + fireRate;
