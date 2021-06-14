@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerLose : MonoBehaviour
+using UnityEngine.SceneManagement;
+public class RestartButtonBehavior : MonoBehaviour
 {
-    public GameObject spaceShip;
-    int currentHealth;
+    void OnMouseDown() 
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("GamePlay");
+    }
     // Start is called before the first frame update
     void Start()
     {
-        spaceShip.GetComponent<Health>().healthPoints = currentHealth;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth == 0)
-        {
-            
-        }
+        
     }
 }

@@ -35,7 +35,7 @@ public class Attack : MonoBehaviour
             nextMovement = Time.time + fireRate;
         }
         //Controller
-        if (Input.GetAxis("Fire") == 1 && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 3)
+        if (Input.GetAxis("Fire Controller") == 1 && nextMovement <= Time.time && PlayerPrefs.GetInt("Input Option") == 3)
         {
             Instantiate(plasmaProjectile, new Vector2(gameObject.transform.position.x, -2.75f), Quaternion.identity);
             nextMovement = Time.time + fireRate;

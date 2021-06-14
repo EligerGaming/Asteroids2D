@@ -6,6 +6,8 @@ TagManager:
   tags:
   - damageObject
   - playerProjectile
+  - GameOverScreen
+  - Pause Game Screen
   layers:
   - Default
   - TransparentFX

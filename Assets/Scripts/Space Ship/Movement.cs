@@ -42,8 +42,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Ship Position = " + getCurrentPosition);
-        Debug.Log("Mouse Position = " + sceneMousePosition.x);
         currentDisplacement = spaceShipSpeed / Application.targetFrameRate;
         sceneMousePosition = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y));
         //Arrow Keys Movement
@@ -103,15 +101,15 @@ public class Movement : MonoBehaviour
         //Controller Movement
         if (PlayerPrefs.GetInt("Input Option") == 3)
         {
-            if (Input.GetAxis("Horizontal") < -0.5 && getCurrentPosition > leftBorder)
+            if (Input.GetAxis("Horizontal Controller") < -0.5 && getCurrentPosition > leftBorder)
             {
                 setCurrentVelocity(spaceShipSpeed * -1, 0);
             }
-            if (Input.GetAxis("Horizontal") > 0.5 && getCurrentPosition < rightBorder)
+            if (Input.GetAxis("Horizontal Controller") > 0.5 && getCurrentPosition < rightBorder)
             {
                 setCurrentVelocity(spaceShipSpeed, 0);
             }   
-            if (Input.GetAxis("Horizontal") > -0.5 && Input.GetAxis("Horizontal") < 0.5)
+            if (Input.GetAxis("Horizontal Controller") > -0.5 && Input.GetAxis("Horizontal Controller") < 0.5)
             {
                 setCurrentVelocity(0, 0);
             }
