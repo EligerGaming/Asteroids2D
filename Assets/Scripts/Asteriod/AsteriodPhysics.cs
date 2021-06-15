@@ -19,7 +19,7 @@ public class AsteriodPhysics : MonoBehaviour
         }
 
     } 
-    [SerializeField] float asteriodSpeed = 10f;
+    [SerializeField] float asteriodSpeed = 7f;
     // Start is called before the first frame update
     void Start()
     {

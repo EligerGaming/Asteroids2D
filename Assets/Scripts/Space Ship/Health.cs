@@ -58,7 +58,7 @@ public class Health : MonoBehaviour
             GameOverScreen.GetComponentInChildren<HighScoreTextBehavior>().HighScore = PlayerPrefs.GetInt("High Score");
             GameOverScreenReactivate();
             //SceneManager.LoadScene("Start Menu");
-            if (ScoreObject.GetComponent<Score>().currentScore > HighScore.getStoredHighScore())
+            if (ScoreObject.GetComponent<Score>().currentScore > HighScore.getStoredHighScore() && PlayerPrefs.GetInt("Current Difficulty") == 0)
             {
                 PlayerPrefs.SetInt("High Score", (int)ScoreObject.GetComponent<Score>().currentScore);
             }

@@ -6,7 +6,9 @@ public class AsteriodSpawning : MonoBehaviour
 {
     [SerializeField] float leftBorder = -4f;
     [SerializeField] float rightBorder = 4f;
-    [SerializeField] float asteriodSpawningRate = 0.5f;
+    [SerializeField] float asteriodSpawningRateDefault = 0.2f;
+    [SerializeField] float asteriodSpawningRateEasy = 1f;
+    float currentSpawningRate;
     float randomNumGen;
     float nextInstantiate;
     public GameObject asteriod;
@@ -19,11 +21,19 @@ public class AsteriodSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefs.GetInt("Current Difficulty") == 0)
+        {
+            currentSpawningRate = asteriodSpawningRateDefault;
+        }
+        if (PlayerPrefs.GetInt("Current Difficulty") == 1)
+        {
+            currentSpawningRate = asteriodSpawningRateEasy;
+        }
         if (nextInstantiate <= Time.time) 
         {
             randomNumGen = Mathf.Round(Random.Range(leftBorder * 10, rightBorder * 10)) / 10;
             Instantiate(asteriod, new Vector2(randomNumGen, 5), Quaternion.identity);
-            nextInstantiate = Time.time + asteriodSpawningRate;
+            nextInstantiate = Time.time + currentSpawningRate;
         }
         
     }

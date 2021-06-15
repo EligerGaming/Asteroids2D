@@ -33,7 +33,7 @@ public class HighScoreTextBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentScoreGameObject.GetComponent<Score>().currentScore > HighScore)
+        if (currentScoreGameObject.GetComponent<Score>().currentScore > HighScore && PlayerPrefs.GetInt("Current Difficulty") == 0)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "New High Score!";
             if (currentTimeStamp <= Time.time) 

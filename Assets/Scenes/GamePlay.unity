@@ -2978,7 +2978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftBorder: -4
   rightBorder: 4
-  asteriodSpawningRate: 0.2
+  asteriodSpawningRateDefault: 0.2
+  asteriodSpawningRateEasy: 1
   asteriod: {fileID: 4696810723168966134, guid: bccb2e01934a4804fa1be61fa806e9b5,
     type: 3}
 --- !u!4 &1546346236
