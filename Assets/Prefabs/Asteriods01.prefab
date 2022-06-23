@@ -96,6 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38688b45949ac684ca66c51b16027085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceShipHurtAnimation: {fileID: 1615308321216950341, guid: 8daa455219a49bd428f0225b9fe103c6,
+    type: 3}
+  AsteriodExplosion: {fileID: 4792299107455570328, guid: 453495bee140b6744961cbd641524762,
+    type: 3}
   currentScore: {fileID: 0}
   asteriodSpeed: 7
 --- !u!50 &-6863265387519239101

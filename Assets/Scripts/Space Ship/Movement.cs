@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
+   // Start is called before the first frame update
+    public GameObject GamePausedObject;
+    private float lastShipPos;
     static float spaceShipY = -3.5f;
     [Range (1f, 10f)] [SerializeField]  float spaceShipSpeed = 10f;
     [SerializeField] private float leftBorder = -4f;
@@ -42,6 +44,10 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GamePausedObject.activeSelf == false) 
+        {
+            lastShipPos = gameObject.GetComponent<Rigidbody2D>().position.x;
+        }  
         currentDisplacement = spaceShipSpeed / Application.targetFrameRate;
         sceneMousePosition = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y));
         //Arrow Keys Movement
@@ -114,6 +120,7 @@ public class Movement : MonoBehaviour
                 setCurrentVelocity(0, 0);
             }
         }
+        //Keeps ship from going past desginated borders
         if (getCurrentPosition >= rightBorder && currentHorizontalVelocity > 0)
         {
             setCurrentVelocity(0, 0);
@@ -121,6 +128,11 @@ public class Movement : MonoBehaviour
         if (getCurrentPosition <= leftBorder && currentHorizontalVelocity < 0)
         {
             setCurrentVelocity(0, 0);
+        }
+        //Locks ship movment if game is paused
+        if (GamePausedObject.activeSelf == true)
+        {
+            setCurrentPosition(lastShipPos);
         }
     }
 }

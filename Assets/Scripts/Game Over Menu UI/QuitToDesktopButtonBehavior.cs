@@ -4,10 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class QuitToDesktopButtonBehavior : MonoBehaviour
 {
-    void OnMouseDown()
+    void OnMouseDown() 
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color (0.7f, 0.7f, 0.7f, 1);
+        gameObject.GetComponent<AudioSource>().Play();
+        Debug.Log("Changing Color");
+    }
+    void OnMouseUp() 
     {
         PlayerPrefs.Save();
         Application.Quit();
+        Debug.Log("Quitting Application");
+        gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f, 1);
     }
     // Start is called before the first frame update
     void Start()
@@ -18,6 +26,6 @@ public class QuitToDesktopButtonBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Master Volume");
     }
 }

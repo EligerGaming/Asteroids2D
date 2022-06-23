@@ -1,14 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class BackButtonBehavior : MonoBehaviour
+
+public class EngineSoundVolume : MonoBehaviour
 {
-    
-    void OnMouseDown() {
-        SceneManager.LoadScene("Start Menu");
-        Debug.Log("Switching Scene");
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +13,6 @@ public class BackButtonBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Engine Volume")*PlayerPrefs.GetFloat("Master Volume");
     }
 }
